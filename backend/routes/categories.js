@@ -7,7 +7,7 @@ const adminAuth = require('../middleware/adminAuth');
 const router = express.Router();
 
 // Get all categories
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const categories = await Category.find({ isActive: true });
     res.json(categories);
