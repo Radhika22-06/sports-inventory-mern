@@ -4,7 +4,7 @@
 }
 
 .hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
   color: white;
   padding: 4rem 2rem;
   text-align: center;
@@ -39,12 +39,12 @@
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 .btn-secondary:hover {
   background: white;
-  color: #667eea;
+  color: #2563eb;
   transform: translateY(-2px);
 }
 
@@ -54,7 +54,7 @@
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .feature-card:hover {

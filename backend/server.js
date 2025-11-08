@@ -6,7 +6,12 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-url.netlify.app', 'https://your-frontend-url.vercel.app']
+    : 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 
 // MongoDB Connection
@@ -20,6 +25,11 @@ app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/issues', require('./routes/issues'));
 app.use('/api/equipment-requests', require('./routes/equipmentRequests'));
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Server is running' });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -17,13 +17,14 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   const navStyle = {
-    background: 'linear-gradient(135deg, #2d3748, #4a5568)',
+    background: 'rgba(255, 255, 255, 0.95)',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
     position: 'sticky',
     top: 0,
     zIndex: 1000,
-    padding: '1rem 0'
+    padding: '1rem 0',
+    borderBottom: '1px solid var(--border-color)'
   };
 
   const containerStyle = {
@@ -36,7 +37,7 @@ const Navbar = () => {
   };
 
   const logoStyle = {
-    color: 'white',
+    color: 'var(--primary-color)',
     textDecoration: 'none',
     fontSize: '1.5rem',
     fontWeight: '700',
@@ -62,15 +63,16 @@ const Navbar = () => {
   };
 
   const linkStyle = (active = false) => ({
-    color: 'white',
+    color: active ? 'var(--primary-color)' : 'var(--text-secondary)',
     textDecoration: 'none',
     padding: '0.5rem 1rem',
     borderRadius: '8px',
     transition: 'all 0.3s ease',
     fontWeight: '500',
-    background: active ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+    background: active ? 'rgba(37, 99, 235, 0.1)' : 'transparent',
     ':hover': {
-      background: 'rgba(255, 255, 255, 0.2)',
+      background: 'rgba(37, 99, 235, 0.1)',
+      color: 'var(--primary-color)',
       transform: 'translateY(-2px)'
     }
   });
@@ -79,7 +81,7 @@ const Navbar = () => {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    color: 'white'
+    color: 'var(--text-primary)'
   };
 
   const roleStyle = {
@@ -93,7 +95,7 @@ const Navbar = () => {
 
   const logoutBtnStyle = {
     padding: '0.5rem 1rem',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'var(--danger-color)',
     color: 'white',
     border: 'none',
     borderRadius: '8px',
@@ -115,7 +117,7 @@ const Navbar = () => {
             '@media (max-width: 768px)': { display: 'block' },
             background: 'none',
             border: 'none',
-            color: 'white',
+            color: 'var(--text-primary)',
             fontSize: '1.5rem',
             cursor: 'pointer'
           }}
@@ -169,11 +171,11 @@ const Navbar = () => {
                   onClick={handleLogout} 
                   style={logoutBtnStyle}
                   onMouseEnter={(e) => {
-                    e.target.style.background = 'rgba(255, 255, 255, 0.3)';
+                    e.target.style.background = '#dc2626';
                     e.target.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+                    e.target.style.background = 'var(--danger-color)';
                     e.target.style.transform = 'translateY(0)';
                   }}
                 >

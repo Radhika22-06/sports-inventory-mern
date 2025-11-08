@@ -69,6 +69,18 @@ router.put('/profile', async (req, res) => {
   }
 });
 
+// Verify token
+router.get('/verify', async (req, res) => {
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+    res.json({ valid: true, user });
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+});
+
 // Get all users (Admin only)
 router.get('/users', async (req, res) => {
   try {

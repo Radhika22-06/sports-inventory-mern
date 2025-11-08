@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 const Categories = () => {
+  const { user } = useAuth();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [items, setItems] = useState([]);
@@ -113,28 +115,30 @@ const Categories = () => {
                 <i className="fas fa-list" style={{ color: 'var(--primary-color)' }}></i>
                 Categories
               </h2>
-              <button
-                onClick={() => setShowAddForm(!showAddForm)}
-                style={{
-                  padding: '0.5rem 1rem',
-                  background: 'var(--primary-color)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-                onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
-              >
-                <i className="fas fa-plus" style={{ marginRight: '0.5rem' }}></i>
-                {showAddForm ? 'Cancel' : 'Add Category'}
-              </button>
+              {user?.role === 'admin' && (
+                <button
+                  onClick={() => setShowAddForm(!showAddForm)}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    background: 'var(--primary-color)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                >
+                  <i className="fas fa-plus" style={{ marginRight: '0.5rem' }}></i>
+                  {showAddForm ? 'Cancel' : 'Add Category'}
+                </button>
+              )}
             </div>
             
-            {showAddForm && (
+            {showAddForm && user?.role === 'admin' && (
               <div className="card" style={{ marginBottom: '1rem', border: '2px solid var(--primary-color)' }}>
                 <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)' }}>Add New Category</h3>
                 <form onSubmit={(e) => {

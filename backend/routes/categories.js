@@ -2,6 +2,7 @@ const express = require('express');
 const Category = require('../models/Category');
 const Item = require('../models/Item');
 const auth = require('../middleware/auth');
+const adminAuth = require('../middleware/adminAuth');
 
 const router = express.Router();
 
@@ -28,8 +29,8 @@ router.get('/:categoryName/items', auth, async (req, res) => {
   }
 });
 
-// Add new category
-router.post('/', auth, async (req, res) => {
+// Add new category (Admin only)
+router.post('/', auth, adminAuth, async (req, res) => {
   try {
     const category = new Category(req.body);
     await category.save();
