@@ -29,6 +29,27 @@ router.get('/:categoryName/items', auth, async (req, res) => {
   }
 });
 
+// Seed categories (temporary route)
+router.get('/seed', async (req, res) => {
+  try {
+    const categories = [
+      { name: 'Cricket', description: 'Cricket equipment and accessories' },
+      { name: 'Football', description: 'Football gear and equipment' },
+      { name: 'Badminton', description: 'Badminton rackets and shuttlecocks' },
+      { name: 'Basketball', description: 'Basketball equipment and accessories' },
+      { name: 'Tennis', description: 'Tennis rackets and balls' },
+      { name: 'Swimming', description: 'Swimming gear and accessories' }
+    ];
+    
+    await Category.deleteMany({});
+    await Category.insertMany(categories);
+    
+    res.json({ message: 'Categories seeded successfully', count: categories.length });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Add new category (Admin only)
 router.post('/', auth, adminAuth, async (req, res) => {
   try {
